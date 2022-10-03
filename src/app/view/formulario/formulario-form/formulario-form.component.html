@@ -1,0 +1,134 @@
+<div class="container mt-3" [formGroup]="formularioGroup">
+  <div class="row">
+    <div class="col-9"><h3>Cadastro de CURRICULO</h3></div>
+    <div class="col-3">
+      <button
+        (click)="editando ? atualizar() : salvar()"
+        [disabled]="
+          formularioGroup.invalid ||
+          formularioGroup.get('questoes').value.length == 0
+        "
+        type="button"
+        class="btn btn-dark"
+      >
+        Salvar
+      </button>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row g-3">
+    <div class="col-sm-8">
+      <app-input type="text" label="Nome" controlName="nome"></app-input>
+      <div>
+        <app-input
+        type="text" mask="00/00/0000" 
+          label="Data nascimento"
+          controlName="dataNascimento"
+        ></app-input>
+
+        <app-input type="text" label="E-mail" controlName="email"></app-input>
+
+        <app-input
+    
+        type="text" mask="(00)000000000" 
+          label="Celular"
+          controlName="celular"
+        ></app-input>
+        <app-input
+        type="text"
+        label="Resumo"
+        controlName="resumo"
+      ></app-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-3" [formGroup]="questaoGroup">
+    <h5>experiencias profissionais</h5>
+    <hr />
+
+    <div class="row g-0">
+      <div
+        *ngFor="
+          let questao of formularioGroup.get('questoes').value;
+          let index = index
+        "
+        class="card border-dark mb-3 mx-2"
+        style="max-width: 15rem;"
+      >
+        <div
+          class="card-header d-flex justify-content-between align-items-start"
+        >
+          {{ questao.dataInicio | uppercase }} - {{ questao.dataFim | uppercase }} - {{ questao.empresa | uppercase }} - {{ questao.descricao | uppercase }}
+          <button
+            (click)="formularioGroup.get('questoes').value.splice(index, 1)"
+            type="button"
+            class="btn-close"
+          ></button>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ questao.titulo }}</h5>
+          <p *ngIf="questao.opcoes.length" class="card-text">
+            <strong>Opções: </strong>
+            <ng-container *ngFor="let opcao of questao.opcoes; let last = last">
+              {{ opcao.valor }} <ng-container *ngIf="!last">,</ng-container>
+            </ng-container>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <app-input
+    type="text" mask="00/00/0000" 
+      label="Data Inicio"
+      controlName="dataInicio"
+    ></app-input>
+    
+    <app-input type="text" mask="00/00/0000"  label="Data Fim" controlName="dataFim"></app-input>
+
+    <app-input type="text" label="Empresa" controlName="empresa"></app-input>
+    <app-input
+      type="text"
+      label="Descrição"
+      controlName="descricao"
+    ></app-input>
+  </div>
+</div>
+
+<div class="container mt-3 mb-3" [formGroup]="opcaoGroup">
+
+  <div class="row g-3">
+    <div class="col-sm-8">
+
+        <button
+          [disabled]="opcaoGroup.invalid"
+          (click)="addOpcao()"
+          class="btn btn-outline-secondary"
+          type="button"
+          id="inputGroupFileAddon04"
+        >
+          <i class="bi bi-plus"></i>
+        </button>
+
+    </div>
+  </div>
+  <ul class="list-group mt-3 mb-3">
+    <li
+      *ngFor="let opcao of questaoGroup.get('opcoes').value; let index = index"
+      class="list-group-item d-flex justify-content-between align-items-start"
+    >
+      {{ index + 1 }} - {{ opcao.valor }}
+      <button
+        (click)="questaoGroup.get('opcoes').value.splice(index, 1)"
+        type="button"
+        class="btn-close"
+      ></button>
+    </li>
+  </ul>
+
+  <app-button (click)="addQuestao()" [disabled]="questaoGroup.invalid">
+    Adicionar
+  </app-button>
+</div>
