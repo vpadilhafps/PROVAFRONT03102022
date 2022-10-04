@@ -3,18 +3,18 @@
     <thead>
       <tr>
         <th scope="col">Nome</th>
-        <th scope="col">Data</th>
-        <th scope="col">email</th>
-        <th scope="col">celular</th>
+        <th scope="col">Data saida</th>
+        <th scope="col">Data chegada</th>
+        <th scope="col">Valor</th>
         <th scope="col">Ações</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let formulario of formularios; let index = index">
         <td>{{ formulario.nome }}</td>
-        <td>{{ formulario.dataNascimento }}</td>
-        <td>{{ formulario.email }}</td>
-        <td>{{ formulario.celular }}</td>
+        <td>{{ formulario.dataSaida }}</td>
+        <td>{{ formulario.dataChegada }}</td>
+        <td>{{ formulario.valor }}</td>
         <td>
           <button
             routerLink="/formulario/visualizar/{{ formulario.id }}"

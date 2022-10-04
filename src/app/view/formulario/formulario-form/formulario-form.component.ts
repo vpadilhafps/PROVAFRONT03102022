@@ -11,17 +11,16 @@ import { FormularioService } from '../../../formulario.service';
 export class FormularioFormComponent implements OnInit {
   formularioGroup = this.fb.group({
     nome: ['', [Validators.required]],
-    dataNascimento: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email ]],
-    celular: ['', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
-    resumo: ['', [Validators.required]],
+    dataSaida: ['', [Validators.required]],
+    dataChegada: ['', [Validators.required]],
+    valor: ['', [Validators.required]],
     questoes: [[]],
   });
 
   questaoGroup = this.fb.group({
     dataInicio: ['', [Validators.required]],
     dataFim: [''],
-    empresa: ['', [Validators.required]],
+    destino: ['', [Validators.required]],
     descricao: ['', [Validators.required]],
     opcoes: [[]],
   });
@@ -30,7 +29,7 @@ export class FormularioFormComponent implements OnInit {
     dataInicio: [null, [Validators.required]],
     dataFim: [null, [Validators.required]],
     descricao: [null, [Validators.required]],
-    empresa: [null, [Validators.required]],
+    destino: [null, [Validators.required]],
   });
 
   editando: boolean;
