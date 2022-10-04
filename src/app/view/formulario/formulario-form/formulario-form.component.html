@@ -57,6 +57,7 @@
         >
           {{ questao.destino | uppercase }} -
           {{ questao.dataInicio | uppercase }} -
+          {{ questao.dataFim | uppercase }} -
           {{ questao.descricao | uppercase }}
           <button
             (click)="formularioGroup.get('questoes').value.splice(index, 1)"
